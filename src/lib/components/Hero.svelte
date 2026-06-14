@@ -140,8 +140,9 @@
         Geometry.
       </p>
       <div class="actions">
-        <a href="#experience" class="btn btn-primary">View Experience</a>
-        <a href="#projects" class="btn btn-secondary">My Work</a>
+        <a href="#experience" class="btn btn-primary">Professional Experience</a
+        >
+        <a href="#projects" class="btn btn-secondary">My Projects</a>
       </div>
     </div>
   </div>

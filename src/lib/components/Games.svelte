@@ -19,7 +19,7 @@
 
 <section id="games" class="games-section">
   <div class="container">
-    <h2 class="section-title">Deployed Games</h2>
+    <h2 class="section-title">Published Games</h2>
     <div class="games-grid">
       {#each games as game}
         <div class="game-card">
