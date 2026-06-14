@@ -32,13 +32,15 @@ export class MinigameLogic {
     this.state = state;
 
     this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color("#E6D3A3");
     const aspect = window.innerWidth / window.innerHeight;
+    const viewD = aspect < 1 ? this.d / aspect : this.d;
 
     this.camera = new THREE.OrthographicCamera(
-      -this.d * aspect,
-      this.d * aspect,
-      this.d,
-      -this.d,
+      -viewD * aspect,
+      viewD * aspect,
+      viewD,
+      -viewD,
       1,
       1000,
     );
@@ -372,10 +374,11 @@ export class MinigameLogic {
     const height = window.innerHeight;
     this.renderer.setSize(width, height);
     const aspect = width / height;
-    this.camera.left = -this.d * aspect;
-    this.camera.right = this.d * aspect;
-    this.camera.top = this.d;
-    this.camera.bottom = -this.d;
+    const viewD = aspect < 1 ? this.d / aspect : this.d;
+    this.camera.left = -viewD * aspect;
+    this.camera.right = viewD * aspect;
+    this.camera.top = viewD;
+    this.camera.bottom = -viewD;
     this.camera.updateProjectionMatrix();
   }
 

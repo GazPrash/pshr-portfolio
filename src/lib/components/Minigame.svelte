@@ -264,4 +264,15 @@
       transform: translateX(0);
     }
   }
+
+  @media (max-aspect-ratio: 1/1) {
+    .top-tooltip {
+      font-size: 0.45rem;
+      white-space: normal;
+      width: 85%;
+      text-align: center;
+      top: 10px;
+      line-height: 1.5;
+    }
+  }
 </style>
