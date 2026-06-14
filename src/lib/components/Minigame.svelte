@@ -1,0 +1,267 @@
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { MinigameLogic, type MinigameState } from "./minigame";
+
+  let canvas: HTMLCanvasElement;
+  let gameLogic: MinigameLogic | undefined;
+
+  let state = $state<MinigameState>({
+    clicks: [],
+    cps: 0,
+    anxious: false,
+    gameState: "COUNTDOWN",
+    countdownText: "3",
+    playerRank: 0,
+  });
+
+  onMount(() => {
+    gameLogic = new MinigameLogic(canvas, state);
+
+    return () => {
+      gameLogic?.dispose();
+    };
+  });
+</script>
+
+<div class="minigame-container">
+  <div class="top-tooltip">"Cheer" Mr. Cube to help him win the race!! :3</div>
+  <canvas bind:this={canvas}></canvas>
+
+  {#if state.gameState === "COUNTDOWN"}
+    <div class="overlay-text">
+      {state.countdownText}
+    </div>
+  {/if}
+
+  {#if state.gameState === "FINISHED"}
+    <div class="overlay-text finished">
+      RACE OVER!<br />
+      <span class="rank-text"
+        >You finished {state.playerRank}{state.playerRank === 1
+          ? "st"
+          : state.playerRank === 2
+            ? "nd"
+            : state.playerRank === 3
+              ? "rd"
+              : "th"}!</span
+      >
+    </div>
+    <div class="play-again-container">
+      <button class="play-again-btn" onclick={() => gameLogic?.resetRace()}>Play again?</button>
+    </div>
+  {/if}
+
+  <div class="ui">
+    <button
+      class="cheer-btn {state.anxious ? 'anxious' : ''}"
+      onclick={() => gameLogic?.cheer()}
+      disabled={state.gameState !== "RACING" || state.anxious}
+    >
+      {state.gameState === "RACING" ? (state.anxious ? "TOO MUCH!!" : "CHEER!") : "WAIT..."}
+    </button>
+    <div class="stats glass">
+      {#if state.gameState === "RACING"}
+        {state.cps < 1
+          ? "No motivation :("
+          : state.cps > 1
+            ? "Too much pressure :("
+            : "Good support!! ^_^"}<br />
+        <small>(Target: 1 click/s)</small>
+      {:else}
+        Get Ready!
+      {/if}
+    </div>
+  </div>
+</div>
+
+<style>
+  .minigame-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .top-tooltip {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.6rem;
+    background: rgba(255, 255, 255, 0.8);
+    color: #ef4444;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+
+  .overlay-text {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: "Press Start 2P", monospace;
+    font-size: 5rem;
+    color: #ef4444;
+    text-shadow: 4px 4px 0 #000;
+    pointer-events: none;
+    z-index: 10;
+    animation: pulse 0.5s infinite alternate;
+  }
+
+  .overlay-text.finished {
+    font-size: 3rem;
+    color: #eab308;
+    line-height: 1.5;
+  }
+
+  .rank-text {
+    font-size: 1.5rem;
+    color: #ffffff;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .play-again-container {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+  .play-again-btn {
+    font-family: "Press Start 2P", monospace;
+    background: #ffffff;
+    color: #0f172a;
+    border: 2px solid #e2e8f0;
+    padding: 0.5rem 1rem;
+    font-size: 0.6rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: inline-block;
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .play-again-btn:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 0 #cbd5e1;
+  }
+  
+  .play-again-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #cbd5e1;
+  }
+
+  .ui {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(0.5rem + 2.5px);
+  }
+
+  .cheer-btn {
+    font-family: "Press Start 2P", monospace;
+    background: #ef4444;
+    color: white;
+    border: 4px solid #7f1d1d;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 8px 0 #7f1d1d;
+    border-radius: 8px;
+    transition:
+      transform 0.1s,
+      box-shadow 0.1s,
+      background-color 0.3s;
+    text-transform: uppercase;
+  }
+
+  .cheer-btn:disabled {
+    background: #6b7280;
+    border-color: #374151;
+    box-shadow: 0 8px 0 #374151;
+    cursor: not-allowed;
+  }
+
+  .cheer-btn:not(:disabled):active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 #7f1d1d;
+  }
+
+  .cheer-btn.anxious {
+    background: #f59e0b;
+    border-color: #b45309;
+    box-shadow: 0 8px 0 #b45309;
+    animation: shake 0.2s infinite;
+  }
+
+  .cheer-btn.anxious:not(:disabled):active {
+    transform: translateY(4px);
+    box-shadow: 0 4px 0 #b45309;
+  }
+
+  .stats {
+    font-family: "Press Start 2P", monospace;
+    font-size: 0.6rem;
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    line-height: 1.5;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>
