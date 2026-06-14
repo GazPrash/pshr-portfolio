@@ -132,8 +132,9 @@
         </a>
       </div>
       <p class="description">
-        I am a Software Engineer with 1 year of experience. I sometimes dabble
-        with Low-Level Programming, Compilers and 3D Graphics. I also have some
+        I am a Software Engineer with 1 year of experience, graduated from NIT
+        Surat with a degree in Mathematics. I often dabble with Low-Level
+        Programming, Compilers, Networking and 3D Graphics. I also have some
         background in Research, specifically with LLMs and Natural Language
         Processing, and most recently I worked as Full Stack Enginner at
         Snaptrude with a focus on Algorithms, 3D Graphics & Computational
@@ -332,7 +333,8 @@
       padding: 2rem 1.5rem;
     }
     .actions {
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
     }
   }
 </style>
