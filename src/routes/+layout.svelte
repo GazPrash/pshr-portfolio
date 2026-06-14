@@ -7,7 +7,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<title>Portfolio</title>
+	<title>Prashant Shrivastava</title>
 </svelte:head>
 
 <main>
