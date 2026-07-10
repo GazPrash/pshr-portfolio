@@ -56,7 +56,7 @@
     >
       {state.gameState === "RACING" ? (state.anxious ? "TOO MUCH!!" : "CHEER!") : state.gameState === "FINISHED" ? "PLAY AGAIN?" : "WAIT..."}
     </button>
-    <div class="stats glass">
+    <div class="stats">
       {#if state.gameState === "RACING"}
         {state.cps < 1
           ? "No motivation :("
@@ -202,8 +202,9 @@
     font-family: "Press Start 2P", monospace;
     font-size: 0.6rem;
     color: var(--color-text);
+    background: rgba(255, 255, 255, 0.866);
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: 12px;
     line-height: 1.5;
   }
 
