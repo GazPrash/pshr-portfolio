@@ -249,13 +249,13 @@
 
   @media (max-width: 768px) {
     .timeline::after {
-      left: 31px;
+      left: 12px;
     }
 
     .timeline-item {
       width: 100%;
-      padding-left: 70px;
-      padding-right: 20px;
+      padding-left: 44px;
+      padding-right: 0;
     }
 
     .timeline-item.right {
@@ -264,7 +264,7 @@
 
     .timeline-item:nth-child(odd) .timeline-dot,
     .timeline-item.right .timeline-dot {
-      left: 19px;
+      left: 0px;
     }
 
     .meta {
