@@ -33,15 +33,15 @@
 
 <section id="experience" class="experience-section">
   <div class="container">
-    <h2 class="section-title">My Experience</h2>
+    <h2 class="section-title"><span class="highlight">My Experience</span></h2>
     <div class="timeline">
       {#each experiences as exp, index}
         <div class="timeline-item" class:right={index % 2 !== 0}>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content glass">
+          <div class="timeline-dot" style="background-color: var(--color-highlight-{index % 4 + 1});"></div>
+          <div class="timeline-content brutal-panel brutal-panel-hover">
             <h3 class="role">{exp.title}</h3>
             <div class="meta">
-              <span class="company">{exp.company}</span>
+              <span class="company brutal-badge" style="background-color: var(--color-highlight-{index % 4 + 2 > 4 ? 1 : index % 4 + 2});">{exp.company}</span>
               <div class="periods-container">
                 {#each exp.periods as p}
                   <span class="period">{p}</span>
@@ -89,15 +89,24 @@
 
 <style>
   .experience-section {
-    background-color: var(--color-surface);
     position: relative;
+    padding-top: 2rem;
   }
 
   .section-title {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2.5rem;
-    color: var(--color-primary-dark);
+    font-size: 4rem;
+    margin-bottom: 4rem;
+    color: var(--color-text);
+  }
+
+  .highlight {
+    background-color: var(--color-highlight-1);
+    padding: 0 1rem;
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-brutal-sm);
+    display: inline-block;
+    transform: rotate(-2deg);
   }
 
   .timeline {
@@ -110,21 +119,20 @@
   .timeline::after {
     content: "";
     position: absolute;
-    width: 4px;
-    background-color: var(--color-primary-light);
+    width: 6px;
+    background-color: var(--color-border);
     top: 0;
     bottom: 0;
     left: 50%;
-    margin-left: -2px;
-    border-radius: 2px;
+    margin-left: -3px;
   }
 
   .timeline-item {
-    padding: 10px 40px;
+    padding: 20px 40px;
     position: relative;
-    background-color: inherit;
     width: 50%;
     box-sizing: border-box;
+    z-index: 2;
   }
 
   .timeline-item:nth-child(odd) {
@@ -137,59 +145,54 @@
 
   .timeline-dot {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    right: -10px;
-    background-color: var(--color-surface);
-    border: 4px solid var(--color-primary);
-    top: 30px;
-    border-radius: 50%;
-    z-index: 1;
-    transition: var(--transition-smooth);
+    width: 24px;
+    height: 24px;
+    right: -12px;
+    background-color: var(--color-highlight-1);
+    border: 3px solid var(--color-border);
+    top: 40px;
+    border-radius: 0; /* Neo-brutalism usually uses square or barely rounded */
+    z-index: 10;
+    transform: rotate(45deg);
   }
 
   .timeline-item.right .timeline-dot {
-    left: -10px;
+    left: -12px;
   }
 
   .timeline-content {
-    padding: 1rem;
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-smooth);
     position: relative;
-  }
-
-  .timeline-content:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--color-primary-light);
+    background: var(--color-surface);
   }
 
   .role {
-    font-size: 1.1rem;
+    font-size: 2rem;
     color: var(--color-text);
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
   }
 
   .meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-    font-size: 0.8rem;
-    color: var(--color-primary-dark);
-    font-weight: 600;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .company {
+    font-size: 1.2rem;
   }
 
   .period {
-    font-weight: 500;
-    color: #6b7280;
+    font-weight: 700;
+    color: var(--color-text);
     background: #ffffff;
-    padding: 2px 8px;
-    border-radius: 6px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 4px 12px;
+    border: 2px solid var(--color-border);
+    box-shadow: 2px 2px 0 var(--color-border);
+    font-size: 0.9rem;
   }
 
   .periods-container {
@@ -200,15 +203,16 @@
   }
 
   .desc-list {
-    color: var(--color-text-muted);
+    color: var(--color-text);
     line-height: 1.6;
-    font-size: 0.85rem;
+    font-size: 1rem;
     padding-left: 1.25rem;
     margin: 0;
+    font-weight: 500;
   }
 
   .desc-item {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
 
   .desc-item:last-child {
@@ -225,16 +229,22 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    color: var(--color-primary);
-    font-size: 0.8rem;
-    font-weight: 500;
+    color: var(--color-text);
+    background: var(--color-highlight-3);
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-border);
+    box-shadow: 2px 2px 0 var(--color-border);
+    font-size: 1rem;
+    font-weight: 700;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: var(--transition-smooth);
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
   }
 
   .cert-link:hover {
-    color: var(--color-primary-dark);
-    text-decoration: underline;
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0 var(--color-border);
   }
 
   @media (max-width: 768px) {
@@ -245,7 +255,7 @@
     .timeline-item {
       width: 100%;
       padding-left: 70px;
-      padding-right: 25px;
+      padding-right: 20px;
     }
 
     .timeline-item.right {
@@ -254,13 +264,13 @@
 
     .timeline-item:nth-child(odd) .timeline-dot,
     .timeline-item.right .timeline-dot {
-      left: 21px;
+      left: 19px;
     }
 
     .meta {
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.75rem;
+      gap: 1rem;
     }
 
     .periods-container {

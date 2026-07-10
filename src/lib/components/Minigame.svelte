@@ -46,18 +46,15 @@
               : "th"}!</span
       >
     </div>
-    <div class="play-again-container">
-      <button class="play-again-btn" onclick={() => gameLogic?.resetRace()}>Play again?</button>
-    </div>
   {/if}
 
   <div class="ui">
     <button
-      class="cheer-btn {state.anxious ? 'anxious' : ''}"
-      onclick={() => gameLogic?.cheer()}
-      disabled={state.gameState !== "RACING" || state.anxious}
+      class="cheer-btn {state.anxious ? 'anxious' : ''} {state.gameState === 'FINISHED' ? 'play-again' : ''}"
+      onclick={() => state.gameState === "FINISHED" ? gameLogic?.resetRace() : gameLogic?.cheer()}
+      disabled={(state.gameState !== "RACING" && state.gameState !== "FINISHED") || state.anxious}
     >
-      {state.gameState === "RACING" ? (state.anxious ? "TOO MUCH!!" : "CHEER!") : "WAIT..."}
+      {state.gameState === "RACING" ? (state.anxious ? "TOO MUCH!!" : "CHEER!") : state.gameState === "FINISHED" ? "PLAY AGAIN?" : "WAIT..."}
     </button>
     <div class="stats glass">
       {#if state.gameState === "RACING"}
@@ -66,7 +63,6 @@
           : state.cps > 1
             ? "Too much pressure :("
             : "Good support!! ^_^"}<br />
-        <small>(Target: 1 click/s)</small>
       {:else}
         Get Ready!
       {/if}
@@ -141,40 +137,6 @@
     margin-bottom: 2rem;
   }
 
-  .play-again-container {
-    position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    pointer-events: auto;
-  }
-
-  .play-again-btn {
-    font-family: "Press Start 2P", monospace;
-    background: #ffffff;
-    color: #0f172a;
-    border: 2px solid #e2e8f0;
-    padding: 0.5rem 1rem;
-    font-size: 0.6rem;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    display: inline-block;
-    box-shadow: 0 2px 0 #cbd5e1;
-  }
-
-  .play-again-btn:hover {
-    background: #f1f5f9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 0 #cbd5e1;
-  }
-  
-  .play-again-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 0 #cbd5e1;
-  }
-
   .ui {
     position: absolute;
     bottom: -20px;
@@ -205,16 +167,23 @@
     text-transform: uppercase;
   }
 
-  .cheer-btn:disabled {
+  .cheer-btn:disabled, .cheer-btn.play-again {
     background: #6b7280;
     border-color: #374151;
     box-shadow: 0 8px 0 #374151;
+  }
+
+  .cheer-btn:disabled {
     cursor: not-allowed;
   }
 
   .cheer-btn:not(:disabled):active {
     transform: translateY(4px);
     box-shadow: 0 4px 0 #7f1d1d;
+  }
+
+  .cheer-btn.play-again:not(:disabled):active {
+    box-shadow: 0 4px 0 #374151;
   }
 
   .cheer-btn.anxious {

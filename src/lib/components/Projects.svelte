@@ -20,6 +20,15 @@
       forks: 2,
     },
     {
+      title: "2D to 3D Voxelizer",
+      description:
+        "A cross-platform application that converts 2D pixel art into 3D low-poly or voxel models. Developed in Go, it uses mathematical algorithms to reconstruct 3D geometry from 2D sprites without using any Generative AI. Available on Windows and macOS.",
+      tags: ["Go", "3D Graphics", "Wails"],
+      link: "https://github.com/GazPrash/2d-to-3d-voxelizer",
+      stars: 9,
+      forks: 0,
+    },
+    {
       title: "Terminal Emulator",
       description:
         "Developed a terminal application from scratch, written in C and made as a research project to learn about the Operating System and System Calls. Written in C using the X-Window system, built on top of the Linux kernel's pty/tty protocol. Made with minimal dependency, making the terminal versatile and usable on almost every possible Linux distribution.",
@@ -27,13 +36,6 @@
       link: "https://github.com/GazPrash/terminal-emulator-x11",
       stars: 2,
       forks: 0,
-    },
-    {
-      title: "ContentFinder - Transformer Based Search System",
-      description:
-        "This project was designed to develop an extensive transformer-based search algorithm for information retrieval. The process is similar to how ChatGPT can respond to conversational queries without needing precisely worded questions. This project was developed during a time where Large context and cheap computer librarian LLM search models were not a thing and hence it was aimed tto use existing State of the Art Language Models like BERT and Sentence-BERT and use them for information retrieval.",
-      tags: ["Python", "PyTorch", "SK-Learn", "BERT Language Model"],
-      link: "https://github.com/GazPrash/content-finder-bert",
     },
     {
       title: "AI Support Chat Plugin",
@@ -75,23 +77,23 @@
 
 <section id="projects" class="projects-section">
   <div class="container">
-    <h2 class="section-title">GitHub Projects</h2>
+    <h2 class="section-title"><span class="highlight">GitHub Projects</span></h2>
     <div class="grid">
-      {#each projects as project}
+      {#each projects as project, index}
         <a
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          class="project-card glass"
+          class="project-card brutal-panel brutal-panel-hover"
         >
           <div class="card-content">
             <div class="header">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="32"
+                height="32"
                 viewBox="0 0 24 24"
-                fill="none"
+                fill="var(--color-highlight-{index % 4 + 1})"
                 stroke="currentColor"
                 stroke-width="2"
                 stroke-linecap="round"
@@ -103,8 +105,8 @@
               >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -129,8 +131,8 @@
                   <span class="stat-item">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
+                      width="16"
+                      height="16"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -152,8 +154,8 @@
                   <span class="stat-item">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="14"
-                      height="14"
+                      width="16"
+                      height="16"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -177,7 +179,7 @@
             <p class="description">
               {project.description}
               {#if project.referenceLink}
-                <span style="display: block; margin-top: 0.75rem;">
+                <span style="display: block; margin-top: 1rem;">
                   <span
                     class="reference-span"
                     role="button"
@@ -195,8 +197,8 @@
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
+                      width="14"
+                      height="14"
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
@@ -231,38 +233,38 @@
 
 <style>
   .projects-section {
-    background-color: var(--color-bg);
+    position: relative;
+    padding-top: 2rem;
   }
 
   .section-title {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: var(--color-primary-dark);
+    font-size: 4rem;
+    margin-bottom: 4rem;
+    color: var(--color-text);
+  }
+
+  .highlight {
+    background-color: var(--color-highlight-2);
+    padding: 0 1rem;
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-brutal-sm);
+    display: inline-block;
+    transform: rotate(1deg);
   }
 
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .project-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 1rem;
-    border-radius: var(--radius-sm);
-    background-color: var(--color-surface);
-    transition: var(--transition-smooth);
     height: 100%;
-    border: 1px solid var(--color-border);
-  }
-
-  .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-primary-light);
+    color: var(--color-text);
   }
 
   .header {
@@ -273,25 +275,22 @@
   }
 
   .folder-icon {
-    color: var(--color-primary);
-    width: 40px;
-    height: 40px;
+    color: var(--color-text);
   }
 
   .external-link-icon {
-    color: var(--color-text-muted);
+    color: var(--color-text);
     transition: var(--transition-smooth);
   }
 
   .project-card:hover .external-link-icon {
-    color: var(--color-primary);
+    transform: scale(1.1);
   }
 
   .title {
-    font-size: 1.1rem;
+    font-size: 1.75rem;
     margin-bottom: 0.5rem;
     color: var(--color-text);
-    transition: var(--transition-smooth);
   }
 
   .stats {
@@ -299,8 +298,8 @@
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .stat-item {
@@ -310,60 +309,46 @@
   }
 
   .stat-separator {
-    color: var(--color-text-muted);
     opacity: 0.5;
   }
 
-  .project-card:hover .title {
-    color: var(--color-primary-dark);
-  }
-
   .description {
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
+    color: var(--color-text);
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 2rem;
+    font-weight: 500;
   }
 
-  .reference-span {
+  .reference-span, .tag {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 0.75rem;
-    font-family: inherit;
-    font-weight: 500;
-    color: #6b7280;
-    background: #ffffff;
-    padding: 2px 8px;
-    border-radius: 6px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease;
+    font-size: 0.85rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-text);
+    background: var(--color-highlight-3);
+    padding: 4px 12px;
+    border: 2px solid var(--color-border);
+    box-shadow: 2px 2px 0 var(--color-border);
+    letter-spacing: 0.5px;
+    transition: var(--transition-smooth);
+  }
+  
+  .reference-span {
+    background: var(--color-highlight-4);
     cursor: pointer;
-    vertical-align: middle;
   }
 
   .reference-span:hover {
-    background: #f9fafb;
-    border-color: #d1d5db;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0 var(--color-border);
   }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem;
-  }
-
-  .tag {
-    font-size: 0.75rem;
-    font-family: inherit;
-    font-weight: 500;
-    color: #6b7280;
-    background: #ffffff;
-    padding: 2px 8px;
-    border-radius: 6px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 </style>

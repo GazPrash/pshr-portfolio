@@ -20,8 +20,10 @@
   .footer {
     text-align: center;
     padding: 3rem 0;
-    background-color: var(--color-bg);
-    color: var(--color-text-muted);
-    border-top: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-top: 4px solid var(--color-border);
+    font-weight: 700;
+    font-size: 1.1rem;
   }
 </style>

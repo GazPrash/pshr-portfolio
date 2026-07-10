@@ -19,17 +19,17 @@
 
 <section id="games" class="games-section">
   <div class="container">
-    <h2 class="section-title">Published Games</h2>
+    <h2 class="section-title"><span class="highlight">Published Games</span></h2>
     <div class="games-grid">
-      {#each games as game}
-        <div class="game-card">
+      {#each games as game, index}
+        <div class="game-card brutal-panel brutal-panel-hover" style="border-top-width: 8px; border-top-color: var(--color-highlight-{index % 4 + 1});">
           <div class="game-image" style="background-image: url('{game.image}')">
             <div class="overlay">
-              <a href={game.playLink} class="play-btn">
+              <a href={game.playLink} class="play-btn" style="background-color: var(--color-highlight-{index % 4 + 1});">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                   class="play-icon"
@@ -39,7 +39,7 @@
               </a>
             </div>
           </div>
-          <div class="game-info glass">
+          <div class="game-info">
             <h3 class="title">{game.title}</h3>
             <p class="description">{game.description}</p>
           </div>
@@ -51,14 +51,24 @@
 
 <style>
   .games-section {
-    background-color: var(--color-surface);
+    position: relative;
+    padding-top: 2rem;
   }
 
   .section-title {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: var(--color-primary-dark);
+    font-size: 4rem;
+    margin-bottom: 4rem;
+    color: var(--color-text);
+  }
+
+  .highlight {
+    background-color: var(--color-highlight-3);
+    padding: 0 1rem;
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-brutal-sm);
+    display: inline-block;
+    transform: rotate(-1deg);
   }
 
   .games-grid {
@@ -68,19 +78,10 @@
   }
 
   .game-card {
-    border-radius: var(--radius-sm);
+    padding: 0;
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition-smooth);
-    position: relative;
-    border: 1px solid var(--color-border);
-  }
-
-  .game-card:hover {
-    transform: translateY(-10px);
-    box-shadow:
-      0 20px 25px -5px rgb(0 0 0 / 0.1),
-      0 8px 10px -6px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
   }
 
   .game-image {
@@ -88,12 +89,13 @@
     background-size: cover;
     background-position: center;
     position: relative;
+    border-bottom: 3px solid var(--color-border);
   }
 
   .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(249, 80, 22, 0.8);
+    background: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,34 +111,46 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #fff;
-    color: var(--color-primary-dark);
+    color: var(--color-text);
     padding: 0.75rem 1.5rem;
-    border-radius: 30px;
-    font-weight: bold;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-brutal-sm);
     transform: translateY(20px);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: var(--transition-smooth);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .game-card:hover .play-btn {
     transform: translateY(0);
   }
 
+  .play-btn:hover {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 1px 1px 0 var(--color-border);
+  }
+
   .game-info {
-    padding: 1rem;
+    padding: 1.5rem;
     background: var(--color-surface);
   }
 
   .title {
-    font-size: 1.1rem;
+    font-size: 2rem;
     margin-bottom: 0.5rem;
     color: var(--color-text);
+    text-transform: uppercase;
   }
 
   .description {
-    color: var(--color-text-muted);
+    color: var(--color-text);
     line-height: 1.6;
-    font-size: 0.85rem;
+    font-size: 1rem;
+    font-weight: 500;
   }
 
   @media (max-width: 768px) {

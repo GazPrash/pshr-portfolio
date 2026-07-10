@@ -211,7 +211,7 @@ export class MinigameLogic {
       group.position.set(xPositions[i], 0, this.startZ);
       this.scene.add(group);
 
-      const maxTrail = 40;
+      const maxTrail = 60;
       const trailGeo = new THREE.BufferGeometry();
       const trailPositions = new Float32Array(maxTrail * 3);
       for (let j = 0; j < maxTrail * 3; j++) {
