@@ -258,7 +258,7 @@ export class MinigameLogic {
       r.speed = 0;
       r.targetSpeed = 0;
       r.finished = false;
-      for (let j = 0; j < 40; j++) {
+      for (let j = 0; j < r.trailPositions.length / 3; j++) {
         r.trailPositions[j * 3] = r.baseX;
         r.trailPositions[j * 3 + 1] = 0.1;
         r.trailPositions[j * 3 + 2] = this.startZ;
