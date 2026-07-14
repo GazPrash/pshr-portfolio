@@ -135,7 +135,7 @@
   }
 
   .social-icon:hover {
-    background-color: var(--color-highlight-1);
+    background-color: #8EA3B8;
     transform: translate(2px, 2px);
     box-shadow: 1px 1px 0 var(--color-border);
   }
