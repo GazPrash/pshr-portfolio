@@ -55,7 +55,7 @@
         </a>
       </div>
       <p class="description">
-        I am a Software Engineer with 1 year of experience, graduated from NIT
+        I am a Software Engineer with 1.5 years of experience, graduated from NIT
         Surat with a degree in Mathematics. I often dabble with Low-Level
         Programming, Compilers, Networking and 3D Graphics. I also have some
         background in Research, specifically with LLMs and Natural Language
@@ -109,7 +109,7 @@
   .subtitle {
     font-size: 1.5rem;
     color: var(--color-text-muted);
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 1.5rem;
   }
 
@@ -145,7 +145,7 @@
     color: var(--color-text);
     max-width: 650px;
     margin: 0 auto 2rem;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .actions {
