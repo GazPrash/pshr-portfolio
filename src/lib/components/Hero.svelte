@@ -59,8 +59,8 @@
         Surat with a degree in Mathematics. I often dabble with Low-Level
         Programming, Compilers, Networking and 3D Graphics. I also have some
         background in Research, specifically with LLMs and Natural Language
-        Processing, and most recently I worked as Full Stack Enginner at
-        Snaptrude with a focus on Algorithms, 3D Graphics & Computational
+        Processing, and most recently I worked as an Algorithms Engineer at
+        Snaptrude with a focus on 3D Graphics & Computational
         Geometry.
       </p>
       <div class="actions">

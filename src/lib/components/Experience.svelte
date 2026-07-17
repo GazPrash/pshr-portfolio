@@ -16,7 +16,7 @@
         "Worked as part of the Graphics team on 3D and 2D geometry, algorithms and graphics pipeline, in a fast-paced startup environment, contributing to a production-level CAD/BIM product used by architects and designers.",
         "Built browser-based 3D graphics features using Babylon.js and maintained frontend architecture using React.js and Redux, as well as backend microservices.",
         "Resolved critical production issues and multiple customer reported issues under tight timelines",
-        "Worked as a Full stack developer along with a focus on Algorithms, 3D computational geometry, shader programming, etc",
+        "Worked as a Algorithms Engineer along with a focus on Full Stack, Graphics, 3D computational geometry, shader programming, etc",
       ],
     },
     {
