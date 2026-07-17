@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   type Project = {
     title: string;
     description: string;
@@ -6,18 +8,18 @@
     link: string;
     stars?: number;
     forks?: number;
+    showStats?: boolean;
     referenceLink?: { text: string; url: string };
   };
 
-  const projects: Project[] = [
+  let projects: Project[] = $state([
     {
       title: "TinyAPI - REST Framework",
       description:
         "An Open Source REST Framework for C++. Designed to be a bare-bones framework and easily hackable for quickly setting up HTTP Servers for simple websites. It is built with basic C sockets and doesnt not depend on any third-party dependencies.",
       tags: ["C++", "TCP/IP", "Socket Programming"],
       link: "https://github.com/GazPrash/TinyAPI",
-      stars: 14,
-      forks: 2,
+      showStats: true,
     },
     {
       title: "2D to 3D Voxelizer",
@@ -25,8 +27,7 @@
         "A cross-platform application that converts 2D pixel art into 3D low-poly or voxel models. Developed in Go, it uses mathematical algorithms to reconstruct 3D geometry from 2D sprites without using any Generative AI. Available on Windows and macOS.",
       tags: ["Go", "3D Graphics", "Wails"],
       link: "https://github.com/GazPrash/2d-to-3d-voxelizer",
-      stars: 9,
-      forks: 0,
+      showStats: true,
     },
     {
       title: "Terminal Emulator",
@@ -34,8 +35,7 @@
         "Developed a terminal application from scratch, written in C and made as a research project to learn about the Operating System and System Calls. Written in C using the X-Window system, built on top of the Linux kernel's pty/tty protocol. Made with minimal dependency, making the terminal versatile and usable on almost every possible Linux distribution.",
       tags: ["C", "X11-Framework"],
       link: "https://github.com/GazPrash/terminal-emulator-x11",
-      stars: 2,
-      forks: 0,
+      showStats: true,
     },
     {
       title: "AI Support Chat Plugin",
@@ -72,7 +72,27 @@
         url: "https://helix.stormhub.org/papers/SHA-256.pdf",
       },
     },
-  ];
+  ]);
+
+  onMount(() => {
+    projects.forEach((project, index) => {
+      if (!project.showStats) return;
+
+      const match = project.link.match(/github\.com\/([^\/]+\/[^\/]+)/);
+      if (match) {
+        const repo = match[1];
+        fetch(`https://api.github.com/repos/${repo}`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.stargazers_count !== undefined) {
+              projects[index].stars = data.stargazers_count;
+              projects[index].forks = data.forks_count;
+            }
+          })
+          .catch((err) => console.error(`Error fetching stats for ${repo}:`, err));
+      }
+    });
+  });
 </script>
 
 <section id="projects" class="projects-section">
