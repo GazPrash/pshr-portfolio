@@ -155,19 +155,21 @@
   }
 
   .btn {
-    padding: 0.75rem 1.75rem;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 1.2rem;
     font-family: var(--font-heading);
+    font-weight: normal;
     cursor: pointer;
     background: var(--color-surface);
     color: var(--color-text);
-    border: 3px solid var(--color-border);
+    border: 2px solid var(--color-border);
     box-shadow: var(--shadow-brutal-sm);
     transition: var(--transition-smooth);
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
+    letter-spacing: 0.5px;
   }
 
   .btn-primary {
